@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>My Blog</title>
+  <style>
+* {
+	margin: 0;
+	padding: 0;
+	
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+	background-color: #030d04;
+	
+}
+
+
+
+nav {
+	 position: fixed;
+     top: 0;
+	background-color: #111111;
+	color: white;
+	position: fixed;
+	display: flex;
+	align-items: center;
+	justify-content:space-between;
+	width: 100%;
+	height: 83px;
+	border-bottom: 2px solid rgb(240, 230, 230)
+
+     
+
+}
+.heading1{
+	margin-left: 25px;
+    font-size: 24px;
+}
+#creat-post{
+font-family: 'Inter';
+font-style: normal;
+font-weight: 400;
+font-size: 35px;
+background-color: #fefefe;
+}
+
+input{
+	width: 100%;
+	height: 40px;
+	background-color: #fefefe;
+}
+
+textarea{
+	width: 100%;
+	height:220px;
+	background-color: #fefefe;
+}
+
+main {
+	margin: 1em;
+}
+
+h2 {
+	font-size: 1.5em;
+}
+
+ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+li {
+	margin: 1em 0;
+}
+
+button {
+	background-color: #030d04;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 24px;
+	
+	cursor: pointer;
+	border-color: #fefefe;
+	color:white;
+	width:200px;
+	height:40px ;
+
+}
+#add-post-btn{
+margin-right: 25px;
+}
+
+.modal {
+	display: none; /* hidden by default */
+	position: fixed; /* stay in place */
+	z-index: 1; /* sit on top */
+	left: 0;
+	top: 0;
+	width: 100%; /* full width */
+	height: 100%; /* full height */
+	/* overflow: auto; enable scroll if needed */
+	background-color: rgba(0,0,0,0.4); /* black w/ opacity */
+
+	
+} 
+.button-aline{
+	display: flex;
+	margin-top: 15px;
+	background-color: #fefefe;
+}
+
+.modal-content {
+	background-color: #fefefe;
+	margin: 10% auto;
+	padding: 1rem;
+	width: 900px;
+	height: 370px;
+	padding: 50px;
+	border-radius: 5px;
+	
+}
+
+.close {
+	float: right;
+	font-size: 1.5em;
+	font-weight: bold;
+	color: black;
+	background-color: #fefefe;
+	cursor: pointer;
+}
+
+.post-list{
+	
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: #fefefe;
+	
+}
+
+#post-form{
+  background-color: #fefefe;
+  
+}
+/* li{
+	font-size: 1.5rem;
+} */
+
+ul{
+	margin-top: 80PX;
+	width: 100%;
+    height: auto;
+	padding-left: 10px;
+	padding-right: 10px;
+
+    
+}
+li{
+	border: 2px solid white;
+	padding: 20px;
+}
+#heading3{
+	font-size: 1.8rem;
+	margin-top: 15px;
+
+}
+
+#content3{
+	margin-top: 20px;
+	font-size: 1.4REM;
+}
+
+#date3{
+	margin-top: 10px;
+	float:right;
+	font-size: 1.2rem;
+}
+
+#dltb{
+  margin-top: 20px;
+  
+}
+/* adding meadia qurire  */
+/* @media  (min-width: 600px )   {
+	.modal-content{
+		margin: 15% auto;
+	    width: 500px;
+	border-radius: 5px;
+	} 
+} */
+@media screen and (max-device-width:600px), screen and (max-width:600px) {
+	.modal-content{
+		margin: 15% auto;
+	    width: 500px;
+	border-radius: 5px;
+	} 
+}
+
+
+  </style>
+</head>
+<body>
+		
+	
+
+     <DIV>
+	<nav>
+		<h1 class="heading1">Blogging Website</h1>
+
+    <button id="add-post-btn">Create New Post</button>
+	</nav>
+    </DIV>
+	<main>
+		 <p>hey</p>
+		<div class="post-list">
+		<ul id="posts-list">
+			<!-- dynamically generated list of posts -->
+		</ul>
+		</div>
+		<!-- modal for adding/editing posts -->
+		<div id="post-modal" class="modal">
+			<div class="modal-content">
+				<span class="close">&times;</span>
+				<form id="post-form">
+                   <p id="creat-post">Create A Post</p>
+		            <br>
+					<input type="text" id="post-title" name="title" placeholder="Enter Your heading...">
+                   <br><br>
+					<textarea id="post-content" name="content" placeholder="Enter Your  Blog post..."></textarea>
+					
+                     <div class="button-aline">
+					<button type="submit">Save Post</button>
+					<button type="submit" id="cancel-post-btn">Cancel Post</button>
+				    </div>
+				</form>
+			</div>
+		</div>
+
+
+	</main>
+
+
+	<script >
+   
+var modal = document.getElementById("post-modal");
+var btn = document.getElementById("add-post-btn");
+
+
+var closeBtn = document.getElementsByClassName("close")[0];
+
+// When the user clicks on the button, open the modal
+btn.onclick = function() {
+	modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), it will close the modal
+closeBtn.onclick = function() {
+	modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, it will get close
+window.onclick = function(event) {
+	if (event.target == modal) {
+		modal.style.display = "none";
+	}
+}
+
+// Handle form submission
+var form = document.getElementById("post-form");
+
+form.addEventListener("submit", function(event) {
+	event.preventDefault();
+
+
+	var title = document.getElementById("post-title").value;
+	var content = document.getElementById("post-content").value;
+
+	// Create a new post object with the current date and time
+	var post = {
+		title: title,
+		content: content,
+		created: new Date()
+	};
+
+	// Add the new post to the list of posts
+	addPost(post);
+
+	// Close the modal
+	modal.style.display = "none";
+
+	// Clear the form
+	form.reset();
+});
+
+// Add event listener to the cancel button
+
+var cancelBtn = document.getElementById("cancel-post-btn");
+
+cancelBtn.addEventListener("click", function(event) {
+	event.preventDefault();
+
+	// Close the modal
+	modal.style.display = "none";
+
+	// Clear the form
+	form.reset();
+});
+
+    // Function to add a new post to the list of posts
+    function addPost(post) {
+	var list = document.getElementById("posts-list");
+
+	// Create new list item with the post title, content, and creation date
+	var item = document.createElement("li");
+	var heading = document.createElement("h3");
+	var content = document.createElement("p");
+	var editBtn = document.createElement("button");
+	var deleteBtn = document.createElement("button");
+	var date = document.createElement("p");
+
+
+    //  creating an id 
+	heading.setAttribute("id", "heading3");
+	content.setAttribute("id", "content3");
+	date.setAttribute("id", "date3");
+	deleteBtn.setAttribute("id", "dltb");
+	editBtn.setAttribute("id", "editbtn");
+
+
+	heading.textContent = post.title;
+	content.textContent = post.content;
+	deleteBtn.textContent = "Delete Post";
+	editBtn.textContent = "Edit Post";
+	date.textContent = "Created: " + post.created.toLocaleString();
+
+	// Add event listeners to the delete and edit buttons
+	deleteBtn.addEventListener("click", function() {
+		list.removeChild(item);
+	});
+
+	editBtn.addEventListener("click", function() {
+		// Open the modal
+		modal.style.display = "block";
+		
+	    
+		// Fill in the form fields with the current post values
+		document.getElementById("post-title").value = post.title;
+		document.getElementById("post-content").value = post.content;
+
+		// Remove the current post from the list when the edit is saved
+		form.addEventListener("submit", function(event) {
+	      event.preventDefault();
+	        list.removeChild(item);
+		})
+	
+		
+	});
+
+	item.appendChild(heading);
+	item.appendChild(content);
+	item.appendChild(deleteBtn);
+	item.appendChild(editBtn);
+	item.appendChild(date);
+	list.appendChild(item);
+
+}
+
+
+
+  </script>
+</body>
+</html>
